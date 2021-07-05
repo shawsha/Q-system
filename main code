@@ -663,34 +663,84 @@ public:
         cout<<endl;
     }
 
-    void sort_list()
+    // Merge sort for Linked Lists
+    void MergeSort(node** headRef)
     {
-        node* current=head;
-        node* index=NULL;
+        node* head = *headRef;
+        node* a;
+        node* b;
 
-        if(head==NULL){
+        /* Base case -- length 0 or 1 */
+        if ((head == NULL) || (head->next == NULL)) {
             return;
         }
-        else{
-            while(current!=NULL){
-                index=current->next;
 
-                while(index!=NULL){
-                    if(current->room_number>index->room_number){           // swaping all the contents
-                        swap(current->room_number,index->room_number);
-                        swap(current->age,index->age);
-                        swap(current->name,index->name);
-                        swap(current->Gender,index->Gender);
-                        swap(current->Address,index->Address);
-                        swap(current->Destination,index->Destination);
-                        swap(current->floor,index->floor);
-                        
-                    }
-                    index=index->next;
-                }
-                current=current->next;
+        /* Split head into 'a' and 'b' sublists */
+        FrontBackSplit(head, &a, &b);
+
+        /* Recursively sort the sublists */
+        MergeSort(&a);
+        MergeSort(&b);
+
+        /* answer = merge the two sorted lists together */
+        *headRef = SortedMerge(a, b);
+    }
+
+
+    node* SortedMerge(node* a, node* b)
+    {
+        node* result = NULL;
+
+        /* Base cases */
+        if (a == NULL)
+            return (b);
+        else if (b == NULL)
+            return (a);
+
+        /* Pick either a or b, and recur */
+        if (a->room_number <= b->room_number) {
+            result = a;
+            result->next = SortedMerge(a->next, b);
+        }
+        else {
+            result = b;
+            result->next = SortedMerge(a, b->next);
+        }
+        return (result);
+    }
+
+/* UTILITY FUNCTIONS */
+/* Split the nodes of the given list into front and back halves,
+    and return the two lists using the reference parameters.
+    If the length is odd, the extra node should go in the front list.
+    Uses the fast/slow pointer strategy. */
+    void FrontBackSplit(node* source,
+                        node** frontRef, node** backRef)
+    {
+        node* fast;
+        node* slow;
+        slow = source;
+        fast = source->next;
+
+        /* Advance 'fast' two nodes, and advance 'slow' one node */
+        while (fast != NULL) {
+            fast = fast->next;
+            if (fast != NULL) {
+                slow = slow->next;
+                fast = fast->next;
             }
         }
+
+        /* 'slow' is before the midpoint in the list, so split it in two
+        at that point. */
+        *frontRef = source;
+        *backRef = slow->next;
+        slow->next = NULL;
+    }
+
+    void sort_list()
+    {
+        MergeSort(&head);
 
         display(head);
     }
