@@ -850,7 +850,7 @@ int main()
             system.re_display_options();
             break;
         case 14:
-            cout<<"~`~`~`~`~`~`~`~`~`~`THANK YOU`~`~`~`~`~`~`~`~`~`~"<<endl;
+            cout<<"~`~`~`~`~`~`~`~`~`~`~`THANK YOU`~`~`~`~`~`~`~`~`~`~`~"<<endl;
             return 0;
         default:
             cout<<" "<<"Wrong option entered \n \t Please enter a correct option"<<endl;
