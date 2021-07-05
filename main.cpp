@@ -81,9 +81,9 @@ private:
 
                 cout<<" "<<"Name: "<<temp->name<<endl;
                 cout<<" "<<"Age: "<<temp->age<<endl;
-                cout<<"Gender: "<<temp->gender<<endl;
-                cout<<"Address: "<<temp->address<<endl;
-                cout<<"Destination: "<<temp->destination;
+                cout<<"Gender: "<<temp->Gender<<endl;
+                cout<<"Address: "<<temp->Address<<endl;
+                cout<<"Destination: "<<temp->Destination;
                 cout<<" "<<"Floor number: "<<temp->floor<<endl;
                 cout<<" "<<"Room number: "<<temp->room_number<<endl;
 
