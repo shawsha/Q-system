@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int groundrooms=200;  // appointing a room as a first patient || complete some error cases for functions(check it)
+const int groundrooms=200;  
 const int firstrooms=150;
 const int secondrooms=150;
 
@@ -707,7 +707,7 @@ int main()
     Quarantine system;
     char choice;
 
-    cout<<"~~~~~~~~~~~~~~~~~~~~2. WELCOME TO NIT SILCHAR QUARANTINE CENTRE ~~~~~~~~~~~~~~~~~~~~"<<endl;
+    cout<<"~~~~~~~~~~~~~~~~~~~~ WELCOME TO NIT SILCHAR QUARANTINE CENTRE ~~~~~~~~~~~~~~~~~~~~"<<endl;
     cout<<"1.---------- To add the information of patients                                                ----------"<<endl;
     cout<<"2.---------- Room Allotment                                                                    ----------"<<endl;
     cout<<"3.---------- Displaying the details of all the patients                                        ----------"<<endl;
