@@ -101,7 +101,7 @@ public:
     void Add_patient(int n)
     {
         string name;
-        string gender;
+        char gender;
         string address;
         string destination;
         int age;
@@ -133,9 +133,9 @@ public:
             cout<<"Gender: ";
             cin>>gender;
             cout<<"Address: ";
-            cin>>address;
+            getline(cin>>ws,address);
             cout<<"Destination: ";
-            cin>>destination;
+            getline(cin>>ws,destination);
             cout<<"Arrival Date (dd_mm_yy)"<<endl;
             cin>>date>>month>>year;
             insertattail(head,age,name,gender,address,destination,date,month,year);
@@ -574,7 +574,7 @@ public:
         bool correct_age=false;
 
         string name;
-        string gender;
+        char gender;
         string address;
         string destination;
         int age;
@@ -624,14 +624,14 @@ public:
         cout<<"Gender: ";
         cin>>gender;
         cout<<"Address: ";
-        cin>>address;
+        getline(cin>>ws,address);
         cout<<"Destination: ";
-        cin>>destination;
+        getline(cin>>ws,destination);
 
         cout<<" "<<"Arrival Date (dd-mm-yy)"<<endl;
         cin>>date>>month>>year;
 
-        node* n= new node(age,name,gender,address,destination,room_num,date,month,year);
+        node* n= new node(age,name,room_num,gender,address,destination,date,month,year);
 
         temp->next=n;
         temp=temp->next;
