@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int groundrooms=200;
+const int groundrooms=200;  // appointing a room as a first patient || complete some error cases for functions(check it)
 const int firstrooms=150;
 const int secondrooms=150;
 
@@ -13,9 +13,6 @@ class node{
 public:
     string name;
     int age;
-    char Gender;
-    string Address;
-    string Destination;
     int room_number;
     int floor;
     int dd;
@@ -25,13 +22,10 @@ public:
     bool enquiry;
 
     node* next;
-    node(int value,string str,int r_no,char gender,string address,string destination,int date,int month,int year) // constructor
+    node(int value,string str,int r_no,int date,int month,int year) // constructor
     {
         age=value;
         name=str;
-        Gender=gender;
-        Address=address;
-        Destination=destination;
         room_number=r_no;
         dd=date;
         mm=month;
@@ -47,12 +41,12 @@ private:
     int g=0,f=0,s=0;  // used for room number allottment
     int r_g=0,r_f=0,r_s=0;  // used for room enquiry
     bool room_status[501]={0};
-    
+   // bool enquiry=false;
     int count=0;
     int patient_count=0;
-    void insertattail(node* &head,int val,string st,char gender,string address,string destination,int date,int month,int year)
+    void insertattail(node* &head,int val,string st,int date,int month,int year)
     {
-        node* n= new node(val,st,-1,gender,address,destination,date,month,year);  // -1 => no room has been allotted yet
+        node* n= new node(val,st,-1,date,month,year);  // -1 => no room has been allotted yet
         if(head==NULL){
             head=n;
             return;
@@ -81,9 +75,9 @@ private:
 
                 cout<<" "<<"Name: "<<temp->name<<endl;
                 cout<<" "<<"Age: "<<temp->age<<endl;
-                cout<<"Gender: "<<temp->Gender<<endl;
-                cout<<"Address: "<<temp->Address<<endl;
-                cout<<"Destination: "<<temp->Destination;
+                /*cout<<"Gender: "<<temp->gender<<endl;
+                cout<<"Address: "<<temp->address<<endl;
+                cout<<"Destination: "<<temp->destination;*/
                 cout<<" "<<"Floor number: "<<temp->floor<<endl;
                 cout<<" "<<"Room number: "<<temp->room_number<<endl;
 
@@ -101,9 +95,9 @@ public:
     void Add_patient(int n)
     {
         string name;
-        char gender;
+        /*string gender;
         string address;
-        string destination;
+        string destination;*/
         int age;
         int date,month,year;
         patient_count++;
@@ -130,15 +124,15 @@ public:
                 }
             }
 
-            cout<<"Gender: ";
+          /*cout<<"Gender: ";
             cin>>gender;
             cout<<"Address: ";
-            getline(cin>>ws,address);
+            cin>>address;
             cout<<"Destination: ";
-            getline(cin>>ws,destination);
-            cout<<"Arrival Date (dd_mm_yy)"<<endl;
+            cin>>destination;*/
+            cout<<" "<<"Arrival Date (dd_mm_yy)"<<endl;
             cin>>date>>month>>year;
-            insertattail(head,age,name,gender,address,destination,date,month,year);
+            insertattail(head,age,name,date,month,year);  // gender,address,destination
         }
     }
 
@@ -303,13 +297,9 @@ public:
                 }
                 cout<<endl;
 
-                cout<<"\t Name: "<<temp->name<<endl;
-                cout<<"\t Age: "<<temp->age<<endl;
-                cout<<"\t Gender: "<<temp->Gender<<endl;
-                cout<<"\t Address: "<<temp->Address<<endl;
-                cout<<"\t Destination: "<<temp->Destination<<endl;
-                cout<<endl;
-                cout<<"\t Floor Number: "<<temp->floor<<endl;
+                cout<<" "<<"Name: "<<temp->name<<endl;
+                cout<<" "<<"Age: "<<temp->age<<endl;
+                cout<<" "<<"Floor Number: "<<temp->floor<<endl;
 
                 for(int i=0;i<20;i++){
                     cout<<"_~.~_"<<" ";
@@ -356,19 +346,19 @@ public:
         string str;
         getline(cin>> ws,str);
         while(temp!=NULL){
-            
             if(temp->name==str){
                 for(int i=0;i<20;i++){
                     cout<<"_~.~_"<<" ";
                 }
                 cout<<endl;
-                
-                cout<<"Age: "<<temp->age<<endl;
-                cout<<"Gender: "<<temp->Gender<<endl;
-                cout<<"Address: "<<temp->Address<<endl;
-                cout<<"Destination: "<<temp->Destination<<endl;;
-                cout<<"Floor number: "<<temp->floor<<endl;
-                cout<<"Room number: "<<temp->room_number<<endl;
+
+                //cout<<" "<<"Name: "<<temp->name<<endl;
+                cout<<" "<<"Age: "<<temp->age<<endl;
+                /*cout<<"Gender: "<<temp->gender<<endl;
+                cout<<"Address: "<<temp->address<<endl;
+                cout<<"Destination: "<<temp->destination;
+                cout<<"Floor number: "<<temp->floor<<endl;*/
+                cout<<" "<<"Room number: "<<temp->room_number<<endl;
 
                 for(int i=0;i<20;i++){
                     cout<<"_~.~_"<<" ";
@@ -402,7 +392,7 @@ public:
             r_s--;
         }
 
-        cout<<"\t Discharging...................Completed"<<endl;
+        cout<<" "<<"Discharging...................Completed"<<endl;
     }
 
     void Discharge(node* &head,string dis_name)  // Discharging => all the information of the patient will also be deleted (limitation)
@@ -437,18 +427,18 @@ public:
             r_s--;
         }
 
-        cout<<"\t Discharging...................Completed"<<endl;
+        cout<<" "<<"Discharging...................Completed"<<endl;
     }
 
     void Discharge_by_name()
     {
         string dis_name;
-        cout<<"\t Enter Patient's Name user want to discharge: "<<endl;
+        cout<<" "<<"Enter Patient's Name user want to discharge: "<<endl;
         getline(cin>> ws,dis_name);
 
         if(head==NULL){
             if(patient_count>0){
-                cout<<"\t All the patients have been discharged"<<endl;
+                cout<<" "<<"All the patients have been discharged"<<endl;
                 return;
             }
             else{
@@ -470,7 +460,7 @@ public:
 
     void Discharge_date()
     {
-        cout<<"\t Enter the Name of Patient"<<endl;
+        cout<<" "<<"Enter the Name of Patient"<<endl;
         int dd1,mm1,yy1;
         string dis_name;
         getline(cin>> ws,dis_name);
@@ -530,7 +520,7 @@ public:
                         yy1=temp->yy;
                     }
 
-                cout<<"\t Discharge date"<<endl;
+                cout<<" "<<"Discharge date"<<endl;
                 cout<<"||-> "<<"dd: "<<dd1<<" "<<"mm: "<<mm1<<" "<<"yy: 20"<<yy1<<" <-||"<<endl;
 
                 return;
@@ -550,8 +540,8 @@ public:
             return;
         }
 
-        cout<<"\t Allott Patient to a particular Room"<<endl;
-        cout<<"\t Enter the Room number user want to fill: ";
+        cout<<" "<<"Allott Patient to a particular Room"<<endl;
+        cout<<" "<<"Enter the Room number user want to fill: ";
 
         cin>>room_num;
         while(room_num>groundrooms+firstrooms+secondrooms){
@@ -574,9 +564,9 @@ public:
         bool correct_age=false;
 
         string name;
-        char gender;
+        /*string gender;
         string address;
-        string destination;
+        string destination;*/
         int age;
         int date,month,year;
 
@@ -621,17 +611,17 @@ public:
             }
         }
 
-        cout<<"Gender: ";
+        /*cout<<"Gender: ";
         cin>>gender;
         cout<<"Address: ";
-        getline(cin>>ws,address);
+        cin>>address;
         cout<<"Destination: ";
-        getline(cin>>ws,destination);
+        cin>>destination;*/
 
         cout<<" "<<"Arrival Date (dd-mm-yy)"<<endl;
         cin>>date>>month>>year;
 
-        node* n= new node(age,name,room_num,gender,address,destination,date,month,year);
+        node* n= new node(age,name,room_num,date,month,year);
 
         temp->next=n;
         temp=temp->next;
@@ -680,11 +670,7 @@ public:
                         swap(current->room_number,index->room_number);
                         swap(current->age,index->age);
                         swap(current->name,index->name);
-                        swap(current->Gender,index->Gender);
-                        swap(current->Address,index->Address);
-                        swap(current->Destination,index->Destination);
                         swap(current->floor,index->floor);
-                        
                     }
                     index=index->next;
                 }
@@ -698,7 +684,7 @@ public:
     void re_display_options()
     {
         cout<<"1.---------- To add the information of patients                                                ----------"<<endl;
-        cout<<"2.---------- Room Allotment of the entered Patient(s)                                          ----------"<<endl;
+        cout<<"2.---------- Room Allotment                                                                    ----------"<<endl;
         cout<<"3.---------- Displaying the details of all the patients                                        ----------"<<endl;
         cout<<"4.---------- To check Rooms available on each floor                                            ----------"<<endl;
         cout<<"5.---------- To find details of a room by entering room number                                 ----------"<<endl;
@@ -721,7 +707,7 @@ int main()
     Quarantine system;
     char choice;
 
-    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~WELCOME TO NIT SILCHAR QUARANTINE CENTRE ~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+    cout<<"~~~~~~~~~~~~~~~~~~~~2. WELCOME TO NIT SILCHAR QUARANTINE CENTRE ~~~~~~~~~~~~~~~~~~~~"<<endl;
     cout<<"1.---------- To add the information of patients                                                ----------"<<endl;
     cout<<"2.---------- Room Allotment                                                                    ----------"<<endl;
     cout<<"3.---------- Displaying the details of all the patients                                        ----------"<<endl;
@@ -744,7 +730,7 @@ int main()
         switch(option)
         {
         case 1:
-            cout<<"Enter number of patients you want to add: ";
+            cout<<"\t Enter number of patients you want to add: ";
             int n;
             cin>>n;
 
@@ -766,7 +752,7 @@ int main()
             cin>>roomnumber;
             while(roomnumber>groundrooms+firstrooms+secondrooms){
                 if(roomnumber>groundrooms+firstrooms+secondrooms){
-                    cout<<"\t INVALID ROOM NUMBER \n \t Please Enter a VALID ROOM NUMBER: "<<endl;
+                    cout<<"\t INVALID ROOM NUMBER \n Please Enter a VALID ROOM NUMBER: "<<endl;
                     cin>>roomnumber;
                 }
             }
@@ -779,7 +765,7 @@ int main()
             cin>>room_no;
             while(room_no>groundrooms+firstrooms+secondrooms){
                 if(room_no>groundrooms+firstrooms+secondrooms){
-                    cout<<"\t INVALID ROOM NUMBER \n \t Please Enter a VALID ROOM NUMBER: "<<endl;
+                    cout<<"\t INVALID ROOM NUMBER \n Please Enter a VALID ROOM NUMBER: "<<endl;
                     cin>>room_no;
                 }
             }
